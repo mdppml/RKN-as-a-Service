@@ -1,0 +1,6 @@
+[submodule "dependencies/eigen"]
+	path = dependencies/eigen
+	url = https://gitlab.com/libeigen/eigen.git
+[submodule "dependencies/cryptopp-cmake"]
+	path = dependencies/cryptopp-cmake
+	url = https://github.com/abdes/cryptopp-cmake.git
