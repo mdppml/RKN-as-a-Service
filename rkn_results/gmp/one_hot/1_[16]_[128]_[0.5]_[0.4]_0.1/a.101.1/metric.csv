@@ -1,0 +1,13 @@
+metric,value
+accuracy,0.6
+auPRC,0.4
+auROC,0.5
+auROC50,1.0
+log.loss,13.815510559082032
+pearson.p,1.0
+pearson.r,
+recall_at_10_fdr,0.0
+recall_at_5_fdr,0.0
+spearman.p,
+spearman.r,
+train_time,0.16039855590400595
