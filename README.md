@@ -1,11 +1,6 @@
-# CECILIA
+# RKN-as-a-Service
 
-CECILIA is a three-party computational framework that offers a variety of building blocks to facilitate more complex algorithms in a privacy preserving manner. It is implemented in C++.
-## Links to Related Papers
-
-[CECILIA: Comprehensive Secure Machine Learning Framework](https://arxiv.org/abs/2202.03023)
-
-[ppAURORA: Privacy Preserving Area Under Receiver Operating Characteristic and Precision-Recall Curves](https://arxiv.org/abs/2102.08788)
+RKN-as-a-Service is a three-party computational privacy preserving protein fold recognition approach. It is implemented in C++.
 
 ## Installation
 
@@ -20,7 +15,7 @@ The benchmark bash script requires [toxiproxy](https://github.com/Shopify/toxipr
 ## Compiling
 
 ### Building with CMake
-After cloning the repo into directory `CECILIA`, you can build the library `CECILIA` by executing the following commands. 
+After cloning the repo into directory `RKN-as-a-Service`, you can build the library `RKN-as-a-Service` by executing the following commands. 
 ```bash
 mkdir build
 cd build
@@ -33,91 +28,34 @@ cmake -S ../ -G -DCMAKE_BUILD_TYPE=Release
 ```bash
 make
 ```
-After the build completes, the output binaries can be found in `CECILIA/build/` directory 
-### Building with C++
-### AUROC
-
-#### helper
-
-```bash
-c++ -std=gnu++17 -pthread -W -O3 apps/proxy.cpp core/Party.cpp core/Party.h utils/constant.h utils/parse_options.cpp utils/parse_options.h utils/connection.h utils/flib.h examples/auroc/llib.h -o proxy_auroc
-```
-
-#### proxy
-
-```bash
-c++ -std=gnu++17 -pthread -W -O3 apps/helper.cpp core/Party.cpp core/Party.h utils/constant.h utils/parse_options.cpp utils/parse_options.h utils/connection.h utils/flib.h -o helper_auroc
-```
-
-### AUROC WITH TIE
-
-#### helper
-
-```bash
-c++ -std=gnu++17 -pthread -W -O3 examples/auroctie/proxy.cpp core/Party.cpp core/Party.h utils/constant.h utils/parse_options.cpp utils/parse_options.h utils/connection.h utils/flib.h examples/auroctie/llib.h -o proxy_auroctie
-```
-
-#### proxy
-
-```bash
-c++ -std=gnu++17 -pthread -W -O3 apps/helper.cpp core/Party.cpp core/Party.h utils/constant.h utils/parse_options.cpp utils/parse_options.h utils/connection.h utils/flib.h -o helper_auroctie
-```
-
-### AUPRC
-
-#### helper
-
-```bash
-c++ -std=gnu++17 -pthread -W -O3 examples/aupr/proxy.cpp core/Party.cpp core/Party.h utils/constant.h utils/parse_options.cpp utils/parse_options.h utils/connection.h utils/flib.h examples/aupr/llib.h -o proxy_aupr
-```
-
-#### proxy
-
-```bash
-c++ -std=gnu++17 -pthread -W -O3 apps/helper.cpp core/Party.cpp core/Party.h utils/constant.h utils/parse_options.cpp utils/parse_options.h utils/connection.h utils/flib.h -o helper_aupr
-```
+After the build completes, the output binaries can be found in `RKN-as-a-Service/build/` directory 
 
 ## Usage
 
-```bash
-./helper_auroc <ip of helper> <port of helper>
-./proxy_auroc Role <port of proxy 1> <ip of proxy 1> <port of helper> <ip of helper> <delta> <input>
-./proxy_auroc Role <port of proxy 1> <ip of proxy 1> <port of helper> <ip of helper> <delta> <input>
-```
-
-- input = #input parties,#samples of the first input party,#samples of the second input party,...,#samples of the last input party
-- delta = delta is a number that specifies how many selections are made after shuffling
-
-```bash
-./helper_auroc "172.31.43.235" 7777
-./proxy_auroc 0 8888 "127.0.0.1" 7777 "127.0.0.1" 10 "8,1000,1000,1000,1000,1000,1000,1000,1000"
-./proxy_auroc 1 8888 "127.0.0.1" 7777 "127.0.0.1" 10 "8,1000,1000,1000,1000,1000,1000,1000,1000"
-```
-
-
-## CNN
-```bash
-./helper_cnn <ip of helper> <port of helper> <model>
-./proxy_cnn Role <port of proxy 1> <ip of proxy 1> <port of helper> <ip of helper> <model> 
-./proxy_cnn Role <port of proxy 1> <ip of proxy 1> <port of helper> <ip of helper> <model> 
-```
-- model = model to be used: [0, 1, 2] with 0 - Chameleon, 1 - MiniONN (MiniONNs model parameter are not consistent), 2 - LeNet5, other value or none - a 4-layer CNN with random weights
-
-```bash
-./helper_cnn 127.0.0.1 7777 0
-./proxy_cnn 0 8888 127.0.0.1 7777 127.0.0.1 0
-./proxy_cnn 1 8888 127.0.0.1 7777 127.0.0.1 0
-```
-
-## RKN
-
-Privacy preserving inference on a pre-trained RKN
+The following bash script describes the template of how privacy preserving inference on a pre-trained RKN can be called:
 
 ```bash
 ./helper <ip of helper> <port of helper>
-./proxy_rkn Role <port of proxy 1> <ip of proxy 1> <port of helper> <ip of helper> <random flag> <number of anchor points> <length of kmers> <lambda> <sigma> 
-./proxy_rkn Role <port of proxy 1> <ip of proxy 1> <port of helper> <ip of helper> <random flag> <number of anchor points> <length of kmers> <lambda> <sigma> 
+./proxy_rkn Role <port of proxy 1> <ip of proxy 1> <port of helper> <ip of helper> <random flag> <number of anchor points> <length of kmers> <lambda> <sigma> <run id> <network> <test sample index>
+./proxy_rkn Role <port of proxy 1> <ip of proxy 1> <port of helper> <ip of helper> <random flag> <number of anchor points> <length of kmers> <lambda> <sigma> <run id> <network> <test sample index>
 ```
+
+Example bash scripts are as follows:
+```bash
+./helper_rkn 127.0.0.1 7777
+./proxy_rkn  0 9999 "127.0.0.1" 7777 "127.0.0.1" 0 128 10 0.5 0.4 1 lan 12
+./proxy_rkn  1 9999 "127.0.0.1" 7777 "127.0.0.1" 0 128 10 0.5 0.4 1 lan 12
+```
+
+It is also possible to run the experiments through bash scripts in `exp_runners/rkn_experiments`. In this folder, _real dataset_ experiments can be run as follows:
+```bash
+./real_data_experiments.sh
+```
+It will iterate over the specified test samples with specified amount of repetitions. The results will be saved in `exp_runners/rkn_experiments/pprkn_inference_results/real` folder. Similarly, the synthetic data experiments can be run using the following bash script:
+```bash
+./synthetic_data_experiments.sh
+```
+The results will be saved in `exp_runners/rkn_experiments/pprkn_inference_results/synthetic` folder.
 
 
 ## License
