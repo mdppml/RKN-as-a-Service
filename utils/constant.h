@@ -33,7 +33,7 @@
 #define MAX_A 0x3fffff
 
 // constants for sockets
-#define SOCKET_NUMBER 8
+#define SOCKET_NUMBER 1
 
 enum Role {
     proxy1, proxy2, helper
@@ -45,12 +45,7 @@ enum Operation {
     coreVectorisedMultiplex,coreVectorisedModularConversion,coreModularConversion,coreVectorisedCompare,coreCompare,
     coreExp, coreVectorisedExp,coreDotProduct,coreVectorisedDotProduct,coreMatrixMatrixMultiply,
     coreVectorisedMatrixMatrixMultiply,coreMatrixVectorMultiply,coreVectorisedMatrixVectorMultiply, coreDivide,
-    coreVectorisedDivide, coreNormalise,coreSort,
-    // AUC
-    aucMostSignificantBit,aucDivide,aucVectorisedRound,aucVectorisedDivide,aucRocNoTie,aucRocWithTie,aucPrCurve,
-    // CNN
-    cnnMax, cnnVectorisedMax, cnnArgMax, cnnRelu, cnnVectorisedRelu, cnnDerivativeRelu, cnnVectorisedDerivativeRelu,
-    cnnConvolutionalLayer, cnnFullyConnectedLayer,
+    coreVectorisedDivide, coreNormalise,
     // RKN
     rknEigenDecomposition, rknVectorisedEigenDecomposition, rknGaussianKernel, rknInverseSqrt, rknVectorisedInverseSqrt,
     rknIteration

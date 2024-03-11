@@ -12,11 +12,12 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 # Libraries:
 find_package(Threads REQUIRED)
 
+
 # Helper
 add_executable(helper apps/helper.cpp)
 target_link_libraries(helper PRIVATE Threads::Threads cryptopp::cryptopp)
 
-# RKN-as-a-service
+# CECILIA - ppRKN
 add_executable(proxy_rkn apps/rkn/proxy.cpp core/Party.h core/rkn.h utils/constant.h utils/parse_options.cpp utils/parse_options.h utils/connection.h utils/flib.h ${ENC_FILES})
 target_link_libraries(proxy_rkn PRIVATE Threads::Threads Eigen3::Eigen cryptopp::cryptopp)
 

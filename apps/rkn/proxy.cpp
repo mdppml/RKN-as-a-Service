@@ -1,5 +1,5 @@
 //
-// Created by aburak on 24.03.22.
+// Created by Ali Burak Ünal on 24.03.22.
 //
 
 #include <cstdlib>
@@ -17,19 +17,7 @@
 #include <cassert>
 
 using namespace std;
-int nstation;
-uint64_t sample_size[1000];
 
-struct prediction {
-    uint64_t val;
-    uint64_t label;
-    uint64_t flag;
-};
-
-typedef std::deque<prediction> client_data;
-client_data *c_data;
-
-uint64_t **nf_data;
 
 
 int main(int argc, char* argv[]) {
@@ -105,7 +93,7 @@ int main(int argc, char* argv[]) {
     double reg = 0.1; // I do not remember this?
     double alpha = 1.0 / (pow(sigma, 2) * k_mer);
     string pooling = "gmp"; // pooling -- which is canceled and has no effect
-    string tfid = "a.101.1"; // sample id -- a.101.1 - a.102.1 - a.102.4
+    string tfid = "a.102.1"; // sample id -- a.101.1 - a.102.1 - a.102.4
     string enc = "one_hot"; // encoding type
     string eps = "_eps"; // do not remember?
     double epsilon = 0.01; // epsilon added on top of eigenvalues for numeric problems - to replicate RKN
@@ -127,6 +115,7 @@ int main(int argc, char* argv[]) {
 
     string base_fn;
     string folder_name;
+    string cecilia_folder = "../";
 
     auto start = chrono::high_resolution_clock::now();
 
@@ -174,7 +163,7 @@ int main(int argc, char* argv[]) {
         // sequence
         folder_name = to_string(n_layer) + "_[" + to_string(n_anc) + "]_[" + to_string(k_mer) + "]_[" +
                              str_lmb + "]_[" + str_sigma + "]_" + str_reg;
-        base_fn = "../../rkn_results/" +  pooling + "/" + enc + "/" + folder_name + "/" + tfid; // new experiments to validate the correctness
+        base_fn = cecilia_folder + "rkn_results/" +  pooling + "/" + enc + "/" + folder_name + "/" + tfid; // new experiments to validate the correctness
 //        cout << "Base folder name: " << base_fn << endl;
         string seq = RecoverSequence(base_fn + "/test_samples.csv", s_ind); // original experiments
         if (seq == "ERROR") {
@@ -344,14 +333,14 @@ int main(int argc, char* argv[]) {
     PrintValue("Prediction", d_prediction);
 
     // writing the execution time results into a file
-    string result_fn = "../../exp_runners/rkn_experiments/pprkn_inference_results/";
+    string result_fn = cecilia_folder + "exp_runners/rkn_experiments/pprkn_inference_results/";
     if(random_flag) {
         result_fn = result_fn + "synthetic/p" +
                     to_string(proxy->GetPRole()) + "_" + to_string(n_anc) + "_" + to_string(k_mer) + "_" +
                     to_string(length) + "_" + to_string(run_id) + "_" + network + ".csv";
     }
     else {
-        result_fn = result_fn + "/real/p" +
+        result_fn = result_fn + "real/p" +
                     to_string(proxy->GetPRole()) + "_" + to_string(n_anc) + "_" + to_string(k_mer) + "_" +
                     to_string(run_id) + "_" + network + "_" + tfid + "_" + to_string(s_ind) + "_" +
                     to_string(length) + ".csv";
@@ -371,7 +360,7 @@ int main(int argc, char* argv[]) {
         res_file.close();
     }
     else {
-        cout << "Unable to open file!" << endl;
+        cout << "Unable to open file: " << result_fn << endl;
         return -1;
     }
     // end of writing the execution time results into a file
