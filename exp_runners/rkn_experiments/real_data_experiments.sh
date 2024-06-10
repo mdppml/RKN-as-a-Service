@@ -6,9 +6,10 @@ lmb=0.5
 sig=0.4
 network=lan
 
-
+# experiment id
 for id in 1
 do
+  # sample id in the file determined in apps/rkn/proxy.cpp using "tfid" variable
 	for ind in {12..189} 
 	do
 		./../../build/helper "127.0.0.1" 7777 &
