@@ -1,6 +1,6 @@
 # RKN-as-a-Service
 
-RKN-as-a-Service is a cloud-based three-party computational privacy preserving protein fold recognition approach. [The paper][https://www.cell.com/patterns/fulltext/S2666-3899(24)00156-9] is published in Patterns. RKN-as-a-service protein fold recognition is implemented in C++.
+RKN-as-a-Service is a cloud-based three-party computational privacy preserving protein fold recognition approach. [The paper](https://www.cell.com/patterns/fulltext/S2666-3899(24)00156-9) is published in Patterns. RKN-as-a-service protein fold recognition is implemented in C++.
 
 ## Installation
 
